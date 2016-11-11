@@ -50,8 +50,8 @@ function problemA () {
   // );
 
   // promise version
-  var promiseA = promisifiedReadFile('poem-one/stanza-02.txt').then(blue);
-  var promiseB = promisifiedReadFile('poem-one/stanza-03.txt').then(blue);
+  var promiseA = promisifiedReadFile('poem-two/stanza-01.txt').then(blue);
+  var promiseB = promisifiedReadFile('poem-two/stanza-02.txt').then(blue);
   Promise.all([
     promiseA,
     promiseB
