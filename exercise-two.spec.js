@@ -113,7 +113,7 @@ describe('exercise two (involving poem two)', function () {
 
 	describe('problemD', function () {
 
-		xit('logs all stanzas in the correct order; if an error occurs does not read the next file and instead logs the error; always logs done at the end', function (done) {
+		it('logs all stanzas in the correct order; if an error occurs does not read the next file and instead logs the error; always logs done at the end', function (done) {
 			this.timeout(3000);
 			exercise.problemD();
 			setTimeout(function () {

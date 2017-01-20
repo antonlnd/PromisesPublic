@@ -90,11 +90,19 @@ function problemB () {
   //   }
   // );
 
-  // promise version
-  var arrayOfPromises = filenames.map(function (name) {
-    return promisifiedReadFile(name).then(blue);
-  });
-  Promise.all(arrayOfPromises)
+  // // promise version
+  // var arrayOfPromises = filenames.map(function (name) {
+  //   return promisifiedReadFile(name).then(blue);
+  // });
+  // Promise.all(arrayOfPromises)
+  // .then(function () {
+  //   console.log('done');
+  // });
+
+  // bluebird Promise.map version
+  Promise.map(filenames, function(fileName) {
+    return promisifiedReadFile(fileName).then(blue)
+  })
   .then(function () {
     console.log('done');
   });
@@ -129,11 +137,10 @@ function problemC () {
   //   }
   // );
 
-  // promise version
-  var masterPromise = Promise.each(filenames, function (name) {
-    return promisifiedReadFile(name).then(blue);
-  });
-  masterPromise
+  // bluebird promise version
+  Promise.each(filenames, function (fileName) {
+    return promisifiedReadFile(fileName).then(blue);
+  })
   .then(function () {
     console.log('done');
   });
@@ -172,15 +179,14 @@ function problemD () {
   //   }
   // );
 
-  // promise version
-  var masterPromise = Promise.each(filenames, function (name) {
-    return promisifiedReadFile(name).then(blue);
-  });
-  masterPromise
-  .catch(magenta)
+  // bluebird promise version
+  Promise.each(filenames, function (fileName) {
+    return promisifiedReadFile(fileName).then(blue);
+  })
   .then(function () {
     console.log('done');
-  });
+  })
+  .catch(magenta);
 
 }
 
