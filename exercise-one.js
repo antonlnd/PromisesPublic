@@ -90,13 +90,23 @@ function problemC () {
   //   });
   // });
 
-  // promise version (hint: don't need to nest `then` calls)
-  promisifiedReadFile('poem-one/stanza-02.txt')
-  .then(blue)
-  .then(function () {
-    return promisifiedReadFile('poem-one/stanza-03.txt');
-  })
-  .then(blue);
+  // // promise version (hint: don't need to nest `then` calls)
+  // promisifiedReadFile('poem-one/stanza-02.txt')
+  // .then(blue)
+  // .then(function () {
+  //   return promisifiedReadFile('poem-one/stanza-03.txt');
+  // })
+  // .then(blue)
+
+  // Promise.all alternative for even better performance because both promises to read the files are being sent out at the same time
+
+  var readingStanzaOne = promisifiedReadFile('poem-one/stanza-02.txt'),
+      readingStanzaTwo = promisifiedReadFile('poem-one/stanza-03.txt');
+
+  Promise.all([readingStanzaOne, readingStanzaTwo])
+    .then(function (processedStanzasArray) {
+      return processedStanzasArray.forEach(blue)
+    })
 
 }
 
@@ -147,7 +157,7 @@ function problemE () {
     return promisifiedReadFile('poem-one/wrong-file-name.txt');
   })
   .then(blue)
-  .catch(magenta);
+  .catch(magenta); // this catches errors for ANY preceding step
 
 }
 
