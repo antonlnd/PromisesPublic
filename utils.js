@@ -25,6 +25,9 @@ utils.promisifiedReadFile = function (filename) {
 	});
 };
 
+// Alternate promisification with bluebird's promisify
+// utils.promisifiedReadFile = Promise.promisify(utils.readFile)
+
 utils.blue = function (text) {
 	console.log(chalk.blue(text));
 };
