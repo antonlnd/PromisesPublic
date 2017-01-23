@@ -188,6 +188,41 @@ function problemD () {
     console.log('done');
   })
 
+// All below are  DIFFERENT from question but WORTH EXAMINING:
+
+  // // (different from question): read in parallel, wait until all done, log
+  // // results in order, skip entirely if any errors, log done as last bit
+  // // this is a very typical use case
+
+  // // Try to understand this:
+  // Promise.all(filenames.map(promisifiedReadFile)).then(function(results){
+  //   results.forEach(green);
+  // })
+  // .catch(red)
+  // .then(done);
+
+  // // (simpler version of previous)
+  // Promise.map(filenames, promisifiedReadFile).each(green).catch(red).then(done);
+
+  // // really fancy: all start in parallel;
+  // // log results in order as fast as possible.
+  // var promises = filenames.map(promisifiedReadFile);
+  // var chain = Promise.resolve();
+  // promises.forEach(function(promise){
+  //   chain = chain.then(function(){
+  //     return promise.then(green);
+  //   });
+  // });
+  // chain.catch(red).then(done);
+
+  // // even better version of above
+  // Promise.reduce(filenames.map(promisifiedReadFile), function(chain, stanza){
+  //   green(stanza);
+  // }, null).catch(red).finally(done);
+
+  // // maybe as good as it gets?
+  // Promise.each(filenames.map(promisifiedReadFile), green).catch(red).then(done);
+
 }
 
 function problemE () {
