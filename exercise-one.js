@@ -1,14 +1,14 @@
 'use strict';
 
-var Promise = require('bluebird'),
+const Promise = require('bluebird'),
     exerciseUtils = require('./utils');
 
-var readFile = exerciseUtils.readFile,
+const readFile = exerciseUtils.readFile,
     promisifiedReadFile = exerciseUtils.promisifiedReadFile,
     blue = exerciseUtils.blue,
     magenta = exerciseUtils.magenta;
 
-var args = process.argv.slice(2).map(function(st){ return st.toUpperCase(); });
+const args = process.argv.slice(2).map(function(st){ return st.toUpperCase(); });
 
 module.exports = {
   problemA: problemA,
@@ -21,7 +21,7 @@ module.exports = {
 
 // runs every problem given as command-line argument to process
 args.forEach(function(arg){
-  var problem = module.exports['problem' + arg];
+  const problem = module.exports['problem' + arg];
   if (problem) problem();
 });
 
@@ -90,23 +90,11 @@ function problemC () {
   //   });
   // });
 
-  // // promise version (hint: don't need to nest `then` calls)
-  // promisifiedReadFile('poem-one/stanza-02.txt')
-  // .then(blue)
-  // .then(function () {
-  //   return promisifiedReadFile('poem-one/stanza-03.txt');
-  // })
-  // .then(blue)
-
-  // Promise.all alternative for even better performance because both promises to read the files are being sent out at the same time
-
-  var readingStanzaOne = promisifiedReadFile('poem-one/stanza-02.txt'),
-      readingStanzaTwo = promisifiedReadFile('poem-one/stanza-03.txt');
-
-  Promise.all([readingStanzaOne, readingStanzaTwo])
-    .then(function (processedStanzasArray) {
-      return processedStanzasArray.forEach(blue)
-    })
+  // promise version (hint: don't need to nest `then` calls)
+  promisifiedReadFile('poem-one/stanza-02.txt')
+  .then(blue)
+  .then(() => promisifiedReadFile('poem-one/stanza-03.txt'))
+  .then(blue);
 
 }
 
@@ -153,11 +141,9 @@ function problemE () {
   // promise version
   promisifiedReadFile('poem-one/stanza-03.txt')
   .then(blue)
-  .then(function () {
-    return promisifiedReadFile('poem-one/wrong-file-name.txt');
-  })
+  .then(() => promisifiedReadFile('poem-one/wrong-file-name.txt'))
   .then(blue)
-  .catch(magenta); // this catches errors for ANY preceding step
+  .catch(magenta);
 
 }
 
@@ -190,14 +176,10 @@ function problemF () {
   // promise version
   promisifiedReadFile('poem-one/stanza-03.txt')
   .then(blue)
-  .then(function () {
-    return promisifiedReadFile('poem-one/stanza-04.txt');
-  })
+  .then(() => promisifiedReadFile('poem-one/stanza-04.txt'))
   .then(blue)
   .catch(magenta)
   // success track
-  .then(function () {
-    console.log('done');
-  });
+  .then(() => console.log('done'));
 
 }

@@ -57,7 +57,7 @@ describe('exercise two (involving poem two)', function () {
 
 	describe('problemA', function () {
 
-		xit('ignoring errors, logs the first and second stanza in any order, and a done message when both are complete', function (done) {
+		it('ignoring errors, logs the first and second stanza in any order, and a done message when both are complete', function (done) {
 			exercise.problemA();
 			setTimeout(function () {
 				expect(blue).to.have.been.called.with(stanzas[0]);
@@ -74,7 +74,7 @@ describe('exercise two (involving poem two)', function () {
 
 	describe('problemB', function () {
 
-		xit('ignoring errors, logs all stanzas in any order, and a done message when all are complete', function (done) {
+		it('ignoring errors, logs all stanzas in any order, and a done message when all are complete', function (done) {
 			this.timeout(3000);
 			exercise.problemB();
 			setTimeout(function () {
@@ -93,7 +93,7 @@ describe('exercise two (involving poem two)', function () {
 
 	describe('problemC', function () {
 
-		xit('ignoring errors, logs all stanzas in the correct order, and a done message when all are complete', function (done) {
+		it('ignoring errors, logs all stanzas in the correct order, and a done message when all are complete', function (done) {
 			this.timeout(3000);
 			exercise.problemC();
 			setTimeout(function () {
@@ -113,7 +113,7 @@ describe('exercise two (involving poem two)', function () {
 
 	describe('problemD', function () {
 
-		xit('logs all stanzas in the correct order; if an error occurs does not read the next file and instead logs the error; always logs done at the end', function (done) {
+		it('logs all stanzas in the correct order; if an error occurs does not read the next file and instead logs the error; always logs done at the end', function (done) {
 			this.timeout(3000);
 			exercise.problemD();
 			setTimeout(function () {
