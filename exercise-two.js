@@ -179,7 +179,22 @@ function problemD () {
   //   }
   // );
 
-  // bluebird promise version
+  // // build promise chain immediately, each step waits for previous to complete
+  // // each step starts next read-then-green cycle
+  // var chain = Promise.resolve();
+  // filenames.forEach(function(fileName) {
+  //   chain = chain.then(function(){
+  //     return promisifiedReadFile(fileName).then(green);
+  //   });
+  // });
+  // chain.catch(red).then(done);
+
+  // // compact answer
+  // Promise.reduce(filenames, function (total, item) {
+  //   return promisifiedReadFile(item).then(green);
+  // }, null).catch(red).then(done);
+
+  // bluebird Promise.each version
   Promise.each(filenames, function (fileName) {
     return promisifiedReadFile(fileName).then(blue);
   })
@@ -232,6 +247,10 @@ function problemE () {
    *
    */
 
+  // promisifiedWriteFile returns a promise
+  // the promise is resolved if the async writefile succeeds
+  // the promise is rejected if the async writefile fails
+
   var fs = require('fs');
   function promisifiedWriteFile (filename, str) {
     return new Promise(function completer (resolve, reject) {
@@ -241,4 +260,12 @@ function problemE () {
       });
     });
   }
+
+    // example: should show 'I ❤ Promises' in green, stored in written.txt
+  promisifiedWriteFile('written.txt', 'I ❤ Promises')
+  .then(function(){
+    return promisifiedReadFile('written.txt');
+  })
+  .then(green)
+  .catch(red);
 }
