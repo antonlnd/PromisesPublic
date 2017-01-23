@@ -200,4 +200,12 @@ function problemF () {
     console.log('done');
   });
 
+  //Alternate using Promise.each
+  // Promise.each([promisifiedReadFile('poem-one/wrong-file-name.txt'),
+  // promisifiedReadFile('poem-one/stanza-03.txt')], blue)
+  //   .catch(magenta)
+  //   .then(function () {
+  //     console.log('done');
+  //   })
+
 }
