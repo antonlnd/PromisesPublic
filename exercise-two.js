@@ -183,10 +183,10 @@ function problemD () {
   Promise.each(filenames, function (fileName) {
     return promisifiedReadFile(fileName).then(blue);
   })
+  .catch(magenta)
   .then(function () {
     console.log('done');
   })
-  .catch(magenta);
 
 }
 
